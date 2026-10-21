@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Prompts</title>
+<style>
+:root{--ink:#0b1f3a;--paper:#fffdf6;--accent:#ffd23f;--line:#0b1f3a;--muted:#33475f}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:1.15rem/1.6 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.wrap{max-width:42rem;margin:0 auto;padding:1rem}
+h1{font-size:2.2rem;line-height:1.15;margin:.5rem 0 .25rem}
+h2{font-size:1.4rem;margin:0 0 .5rem}
+p{margin:.5rem 0}
+.sub{font-size:1.2rem;color:var(--muted)}
+section{border-top:4px solid var(--ink);padding:1rem 0;margin-top:1rem}
+.progress{font-weight:700}
+#prompt{font-size:1.9rem;line-height:1.35;font-weight:600;overflow-wrap:anywhere;margin:.5rem 0 1rem}
+button{font:inherit;min-height:2.75rem;min-width:2.75rem;padding:.5rem 1rem;border:3px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:.5rem;cursor:pointer}
+button.primary{display:block;width:100%;min-height:4rem;background:var(--accent);font-size:1.5rem;font-weight:700}
+button:disabled{border-style:dashed;color:#55657a;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.75rem}
+.row button{flex:1 1 10rem}
+:focus-visible{outline:4px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 7px var(--accent)}
+.complete{border:3px solid var(--ink);background:#e8f0ff;padding:.5rem .75rem;font-weight:700}
+label,legend{font-weight:600}
+.check{display:flex;align-items:center;gap:.75rem;min-height:2.75rem}
+.check input{width:1.6rem;height:1.6rem}
+fieldset{border:0;padding:0;margin:1rem 0 0}
+.speeds{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem}
+.speeds label{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:400}
+.speeds input{width:1.4rem;height:1.4rem}
+.note{color:var(--muted);font-size:1rem}
+ol{padding-left:1.5rem}
+ol li{margin:.4rem 0}
+h1,h2,h3,p,li,label,legend,button,a{overflow-wrap:anywhere}
+.example{border-left:6px solid var(--ink);padding-left:1rem}
+nav{margin:.5rem 0}
+nav a{display:inline-block;min-height:2.75rem;padding:.5rem .25rem;margin-right:1rem;color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:.2em}
+h2[tabindex="-1"]{scroll-margin-top:1rem}
+h2[tabindex="-1"]:focus{outline:4px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 7px var(--accent)}
+.problem{border:3px solid var(--ink);background:#fff1ee;padding:.5rem .75rem;font-weight:600}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Story Prompts</h1>
+  <p class="sub">A storytelling game about changing perspectives.</p>
+</header>
+<nav aria-label="Page shortcuts"><a href="#game-h">Skip to game</a><a href="#settings-h">Speech settings</a></nav>
+<main>
+  <section aria-labelledby="rules-h">
+    <h2 id="rules-h">How to play</h2>
+    <div class="row"><button id="read-rules" type="button">Read game rules</button><button id="stop-rules" type="button">Stop reading</button></div>
+    <p id="rules-error" class="problem" hidden></p>
+    <div id="rules-text">
+      <p>This is a spoken storytelling game for two or more players.</p>
+      <p>Purpose: Practice explaining your reasoning and reconsidering a situation as new information appears.</p>
+      <ol>
+        <li>One player draws a prompt and reads it aloud, or uses the website to read it.</li>
+        <li>The next player suggests the worst possible response to the situation.</li>
+        <li>The following player adds information that makes that response seem reasonable.</li>
+        <li>The next player adds information that makes the same response seem unreasonable again.</li>
+        <li>Continue taking turns, changing whether the response seems reasonable or unreasonable.</li>
+      </ol>
+      <p>Keep the original action the same. Add new information to change how people judge it. You may add information, but you cannot contradict facts already established in the story.</p>
+      <p>The round ends when a player gives up or cannot provide a valid continuation. The last player to give a complete valid answer earns a point. Players decide together whether an answer follows the rules.</p>
+      <p>With two players, simply alternate turns.</p>
+      <p>You may ask to hear the prompt again or ask another player to recap the story at any time, without penalty.</p>
+      <h3>Example</h3>
+      <div class="example">
+        <p>Prompt: You wake up and your phone is dead.</p>
+        <p>Bad response: Throw the phone away.</p>
+        <p>New information that supports the response: The phone is broken beyond repair.</p>
+        <p>New information that challenges the response: The broken phone contains a memory card with important photos.</p>
+        <p>Saying “It only needed charging” would contradict the established fact that the phone was broken beyond repair.</p>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="settings-h">
+    <h2 id="settings-h" tabindex="-1">Speech settings</h2>
+    <div class="check"><input type="checkbox" id="auto" aria-describedby="auto-help"><label for="auto">Automatically read prompts</label></div>
+    <p class="note" id="auto-help">You can use the built-in reading controls or your own screen reader. If you use a screen reader, you may prefer to turn automatic reading off.</p>
+    <fieldset>
+      <legend>Reading speed</legend>
+      <div class="speeds">
+        <label><input type="radio" name="speed" value="slow">Slow</label>
+        <label><input type="radio" name="speed" value="normal" checked>Normal</label>
+        <label><input type="radio" name="speed" value="fast">Fast</label>
+      </div>
+    </fieldset>
+  </section>
+
+  <section aria-labelledby="game-h">
+    <h2 id="game-h" tabindex="-1">Prompt</h2>
+    <p class="progress" id="progress"></p>
+    <p id="prompt"></p>
+    <p id="complete" class="complete" hidden>All prompts have been drawn. Use “Shuffle and start again” for a new round of the deck.</p>
+    <button id="draw" class="primary" type="button">Draw a prompt</button>
+    <div class="row">
+      <button id="repeat" type="button" disabled>Repeat prompt</button>
+      <button id="stop" type="button">Stop reading</button>
+    </div>
+    <p id="speech-error" class="problem" hidden></p>
+    <p id="speech-state" class="note"></p>
+    <p id="unsupported" class="note" hidden>Built-in speech is unavailable in this browser. You can still read the prompts or use your screen reader.</p>
+    <p class="note">Play together aloud. This website provides prompts; players continue the story. “Repeat prompt” repeats the original situation, not the story you have built.</p>
+  </section>
+
+</main>
+<div id="status" class="sr" role="status" aria-live="polite"></div>
+</div>
+<script src="prompts.js"></script>
+<script src="deck.js"></script>
+<script src="speech.js"></script>
+<script src="controller.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
